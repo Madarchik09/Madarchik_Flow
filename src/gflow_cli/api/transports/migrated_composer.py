@@ -2061,6 +2061,27 @@ class MigratedComposer:
                     "buffer": await asyncio.to_thread(image_path.read_bytes),
                 }
             )
+
+            async def _try_accept_terms_dialog() -> None:
+                for _ in range(12):
+                    if reply.done():
+                        return
+                    try:
+                        if await page.locator(DIALOG).count() > dialogs_before:
+                            dlg = page.locator(DIALOG).last
+                            cb = dlg.locator("input[type='checkbox'], mat-checkbox, .mat-checkbox").first
+                            if await cb.count() and await cb.is_visible():
+                                await cb.click()
+                            btn = dlg.locator("button.flow-button-medium, button").last
+                            if await btn.count() and await btn.is_visible():
+                                await btn.click()
+                                log.info("migrated.terms_dialog_auto_accepted")
+                            return
+                    except Exception:
+                        pass
+                    await asyncio.sleep(0.5)
+
+            dialog_task = asyncio.create_task(_try_accept_terms_dialog())
             try:
                 status, text = await asyncio.wait_for(reply, timeout=FRAME_UPLOAD_S)
             except TimeoutError:
@@ -2112,6 +2133,9 @@ class MigratedComposer:
                         "image does NOT help; three different files were ruled out in #719."
                     ),
                 ) from None
+            finally:
+                if not dialog_task.done():
+                    dialog_task.cancel()
             if status != 200:
                 raise MediaUploadRejectedError(
                     detail=f"migrated host: the upload rpc {UPLOAD_RPC} answered HTTP {status}",

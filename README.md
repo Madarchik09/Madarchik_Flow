@@ -1,8 +1,11 @@
-<!-- mcp-name: io.github.ffroliva/gflow-cli -->
+# Madarchik_Flow
 
-# gflow-cli
-
-> Python CLI and MCP server for Google Flow. Drive [Veo](https://labs.google/fx/tools/flow) (image-to-video, text-to-video) and Imagen (text-to-image) from your terminal: scripted, batched, pipeline-ready.
+> Enhanced Python CLI and MCP server for Google Flow. Drive [Veo](https://labs.google/fx/tools/flow) (image-to-video, text-to-video) and Imagen (text-to-image) from your terminal: scripted, batched, pipeline-ready.
+> 
+> **Key Enhancements by Madarchik:**
+> - ⚡ **Auto-Accept Upload Rights:** Automatically accepts Google Flow's one-time "Rights to use this image" modal on fresh accounts without interrupting unattended batch/MCP pipelines.
+> - 🔌 **Seamless MCP Hub & IDE Integration:** Pre-configured for stdio and HTTP transports with full prompt tool support.
+> - 🎯 **Fast i2i & Upscale Automation:** Streamlined image-to-image blending and free 2K/4K upscaling out of the box.
 
 [![PyPI version](https://img.shields.io/pypi/v/gflow-cli.svg)](https://pypi.org/project/gflow-cli/)
 [![CI](https://github.com/ffroliva/gflow-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/ffroliva/gflow-cli/actions/workflows/ci.yml)

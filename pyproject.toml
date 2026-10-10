@@ -1,11 +1,11 @@
 [project]
-name = "gflow-cli"
+name = "madarchik-flow"
 version = "0.83.1"
-description = "CLI and MCP server for Google Flow — drive Veo text-to-video, image-to-video and Imagen image generation from the terminal."
+description = "Madarchik_Flow — Enhanced CLI and MCP server for Google Flow with auto-accept upload rights and multi-account automation."
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"
-authors = [{ name = "Flavio Oliva", email = "ffroliva@gmail.com" }]
+authors = [{ name = "Madarchik", email = "madarchik09@gmail.com" }]
 # PyPI search matches on these, and every downstream catalog copies the summary
 # above verbatim. Both previously described only image-to-video and never
 # mentioned MCP, which is half of what this package is.
@@ -149,24 +149,16 @@ patchright = [
 ]
 
 [project.scripts]
+madarchik-flow = "gflow_cli.cli:main"
 gflow = "gflow_cli.cli:main"
 flow = "gflow_cli.cli:main"
-# Third alias, and it earns its keep: `uvx <name>` runs the console script whose
-# name matches the *package*, so without this `uvx gflow-cli mcp run` fails with
-# uv's own "Use `uvx --from gflow-cli <EXECUTABLE-NAME>` instead" (verified against
-# 0.74.0). The MCP registry's server.json builds exactly that `uvx <identifier>`
-# command from the PyPI identifier and has no field for a differing executable
-# name, so a listing without this alias would be broken on arrival. It is also
-# what a user types first, the package being what they just installed.
 gflow-cli = "gflow_cli.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/ffroliva/gflow-cli"
-Documentation = "https://ffroliva.github.io/gflow-cli/"
-Repository = "https://github.com/ffroliva/gflow-cli"
-Changelog = "https://github.com/ffroliva/gflow-cli/blob/main/CHANGELOG.md"
-Issues = "https://github.com/ffroliva/gflow-cli/issues"
-Funding = "https://github.com/sponsors/ffroliva"
+Homepage = "https://github.com/Madarchik09/Madarchik_Flow"
+Documentation = "https://github.com/Madarchik09/Madarchik_Flow#readme"
+Repository = "https://github.com/Madarchik09/Madarchik_Flow"
+Issues = "https://github.com/Madarchik09/Madarchik_Flow/issues"
 
 [build-system]
 requires = ["hatchling"]
