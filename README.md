@@ -2,10 +2,65 @@
 
 > Enhanced Python CLI and MCP server for Google Flow. Drive [Veo](https://labs.google/fx/tools/flow) (image-to-video, text-to-video) and Imagen (text-to-image) from your terminal: scripted, batched, pipeline-ready.
 > 
+> *Madarchik_Flow is an enhanced fork of [gflow-cli](https://github.com/ffroliva/gflow-cli) by Flavio Oliva, distributed under the [MIT License](LICENSE).*
+> 
 > **Key Enhancements by Madarchik:**
 > - ⚡ **Auto-Accept Upload Rights:** Automatically accepts Google Flow's one-time "Rights to use this image" modal on fresh accounts without interrupting unattended batch/MCP pipelines.
 > - 🔌 **Seamless MCP Hub & IDE Integration:** Pre-configured for stdio and HTTP transports with full prompt tool support.
 > - 🎯 **Fast i2i & Upscale Automation:** Streamlined image-to-image blending and free 2K/4K upscaling out of the box.
+> - 🪟 **One-Click Windows Automation:** Dedicated `Install.bat` and interactive `Auth.bat` scripts for painless zero-config setup.
+
+---
+
+## 🪟 Windows Quick Start (Install.bat & Auth.bat)
+
+### 1. Установка в 1 клик
+Запустите файл **`Install.bat`** из корня репозитория:
+* Автоматически создаёт локальное виртуальное окружение `.venv`.
+* Устанавливает все зависимости и браузер Playwright Chromium.
+
+### 2. Авторизация аккаунтов
+Запустите файл **`Auth.bat`** для вызова интерактивного меню:
+* `[1]` Войти в Google-аккаунт через Chrome (`gflow auth login`).
+* `[2]` Проверить статус активных сессий (`gflow auth status`).
+* `[3]` Переключить активный аккаунт (`gflow auth use`).
+
+---
+
+## 🔌 Подключение к MCPHub и нейросетям (Почему не нужен Start.bat)
+
+> 💡 **Почему нет файла `Start.bat`?**
+> Сервер Madarchik_Flow работает по протоколу **stdio MCP**. Это значит, что ваш MCP-клиент (MCPHub, Claude Desktop, Cursor, OpenCode) **сам запускает и останавливает процесс в фоне** ровно в тот момент, когда агент или вы вызываете инструмент генерации. Никаких лишних открытых черных окон и занятых портов не требуется.
+
+### Готовые конфигурации для копирования
+
+#### Для **MCPHub** (`mcp_settings.json`):
+```json
+{
+  "mcpServers": {
+    "madarchik_flow": {
+      "command": "C:\\path\\to\\Madarchik_Flow\\.venv\\Scripts\\gflow.exe",
+      "args": ["mcp", "run"],
+      "enabled": true
+    }
+  }
+}
+```
+
+#### Для **Claude Desktop / Cursor / OpenCode**:
+```json
+{
+  "mcpServers": {
+    "madarchik_flow": {
+      "command": "C:\\path\\to\\Madarchik_Flow\\.venv\\Scripts\\gflow.exe",
+      "args": ["mcp", "run"]
+    }
+  }
+}
+```
+*(Замените `C:\\path\\to\\Madarchik_Flow` на реальный путь к вашей папке).*
+
+---
 
 [![PyPI version](https://img.shields.io/pypi/v/gflow-cli.svg)](https://pypi.org/project/gflow-cli/)
 [![CI](https://github.com/ffroliva/gflow-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/ffroliva/gflow-cli/actions/workflows/ci.yml)
